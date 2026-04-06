@@ -4,6 +4,7 @@ import kz.kop_flowers.model.dto.CategoryDto;
 import kz.kop_flowers.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -19,10 +20,12 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping()
     public CategoryDto createCategory(
             @RequestBody CategoryDto categoryDto
     ) {
         return categoryService.createCategory(categoryDto);
     }
+
 }

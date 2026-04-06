@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class FlowerDto {
     private Integer id;
     private String name;
-    private String size;
     private BigDecimal price;
+    private String size;
     private CategoryDto category;
 }

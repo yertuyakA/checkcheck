@@ -1,12 +1,14 @@
 package kz.kop_flowers.model.dto;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CategoryDto {
+
     private Integer id;
     private String name;
 }
-

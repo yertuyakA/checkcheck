@@ -1,6 +1,6 @@
 package kz.kop_flowers.service;
 
-import kz.kop_flowers.model.FlowerMapper;
+import kz.kop_flowers.mapper.CategoryMapper;
 import kz.kop_flowers.model.dto.CategoryDto;
 import kz.kop_flowers.model.entity.Category;
 import kz.kop_flowers.model.exception.CategoryNotFoundException;
@@ -15,11 +15,11 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final FlowerMapper mapper;
+    private final CategoryMapper categoryMapper;
 
     @Override
     public CategoryDto getCategoryDtoById(Integer id) {
-        return mapper.fromEntityToDto(getCategoryById(id));
+        return categoryMapper.toDto(getCategoryById(id));
     }
 
     @Override
@@ -31,16 +31,14 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryDto> getAllCategories() {
-        return categoryRepository.findAll().stream().map(mapper::fromEntityToDto).toList();
+        return categoryRepository.findAll().stream().map(categoryMapper::toDto).toList();
     }
 
     @Override
     public CategoryDto createCategory(CategoryDto categoryDto) {
-        Category category = Category.builder()
-                .name(categoryDto.getName())
-                .build();
+        Category category = categoryMapper.toEntity(categoryDto);
         category = categoryRepository.save(category);
-        return mapper.fromEntityToDto(category);
+        return categoryMapper.toDto(category);
     }
 
 }

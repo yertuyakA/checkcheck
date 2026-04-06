@@ -1,6 +1,6 @@
 package kz.kop_flowers.service;
 
-import kz.kop_flowers.model.FlowerMapper;
+import kz.kop_flowers.mapper.FlowerMapper;
 import kz.kop_flowers.model.dto.FlowerDto;
 import kz.kop_flowers.model.entity.Flower;
 import kz.kop_flowers.model.exception.FlowerNotFoundException;
