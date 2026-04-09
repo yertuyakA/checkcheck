@@ -1,17 +1,14 @@
-package kop_flowers;
+package kz.kop_flowers.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kz.kop_flowers.controller.FlowerController;
 import kz.kop_flowers.model.dto.CategoryDto;
 import kz.kop_flowers.model.dto.FlowerDto;
 import kz.kop_flowers.service.FlowerService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -23,26 +20,17 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @WebMvcTest(FlowerController.class)
 class FlowerControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-//    @Autowired
-//    private FlowerService flowerService;
-
-    private FlowerService flowerService;
-
-    @BeforeEach
-    void setUp() {
-        flowerService = Mockito.mock(FlowerService.class);
-    }
-
-
     @Autowired
     private ObjectMapper objectMapper;
+
+    @MockBean
+    private FlowerService flowerService;
 
     @Test
     void testGetAllFlowers() throws Exception {
@@ -99,3 +87,4 @@ class FlowerControllerTest {
                 .andExpect(jsonPath("$.category.name").value("Birthday"));
     }
 }
+

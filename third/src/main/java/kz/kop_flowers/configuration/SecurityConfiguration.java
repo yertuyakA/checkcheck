@@ -20,8 +20,10 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
         http.authorizeHttpRequests(auth ->
-                        auth.requestMatchers(HttpMethod.GET, "/api/flowers/", "/api/flowers/**").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/flowers").hasRole("ADMIN")
+                        auth
+                                .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/category", "/api/category/").hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.POST, "/api/flowers", "/api/flowers/").hasRole("ADMIN")
                                 .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults());
